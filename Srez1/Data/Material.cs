@@ -19,9 +19,11 @@ public partial class Material
 
     public decimal PackageQuantity { get; set; }
 
-    public string UnitOfMeasure { get; set; } = null!;
+    public int UnitOfMeasureId { get; set; }
 
     public virtual MaterialType MaterialType { get; set; } = null!;
+
+    public virtual UnitOfMeasure UnitOfMeasure { get; set; } = null!;
 
     public virtual ICollection<Supplier> Suppliers { get; set; } = new List<Supplier>();
 }

@@ -15,5 +15,9 @@ public partial class Supplier
 
     public DateOnly StartDate { get; set; }
 
+    public int SupplierTypeId { get; set; }
+
+    public virtual SupplierType SupplierType { get; set; } = null!;
+
     public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
 }

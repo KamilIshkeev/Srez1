@@ -1,5 +1,4 @@
-﻿// Srez1/Program.cs
-using Avalonia;
+﻿using Avalonia;
 
 namespace Srez1;
 

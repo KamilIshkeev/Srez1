@@ -1,4 +1,3 @@
-// Srez1/Views/SuppliersWindow.axaml.cs
 using Avalonia.Controls;
 using Microsoft.EntityFrameworkCore;
 using Srez1.Data;
@@ -17,7 +16,6 @@ public partial class SuppliersWindow : Window
     {
         InitializeComponent();
 
-        // Загружаем материал вместе с его поставщиками
         var material = db.Materials
             .Include(m => m.Suppliers)
             .FirstOrDefault(m => m.Id == materialId);

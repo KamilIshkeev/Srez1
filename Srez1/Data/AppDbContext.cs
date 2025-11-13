@@ -23,6 +23,10 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
 
+    public virtual DbSet<SupplierType> SupplierTypes { get; set; }
+
+    public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=srez1;Username=postgres;Password=1108");
@@ -49,7 +53,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.StockQuantity)
                 .HasPrecision(15, 2)
                 .HasColumnName("stock_quantity");
-            entity.Property(e => e.UnitOfMeasure).HasColumnName("unit_of_measure");
+            entity.Property(e => e.UnitOfMeasureId).HasColumnName("unit_of_measure_id");
             entity.Property(e => e.UnitPrice)
                 .HasPrecision(12, 2)
                 .HasColumnName("unit_price");
@@ -58,6 +62,11 @@ public partial class AppDbContext : DbContext
                 .HasForeignKey(d => d.MaterialTypeId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("material_material_type_id_fkey");
+
+            entity.HasOne(d => d.UnitOfMeasure).WithMany(p => p.Materials)
+                .HasForeignKey(d => d.UnitOfMeasureId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("material_unit_of_measure_id_fkey");
 
             entity.HasMany(d => d.Suppliers).WithMany(p => p.Materials)
                 .UsingEntity<Dictionary<string, object>>(
@@ -122,6 +131,36 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Rating).HasColumnName("rating");
             entity.Property(e => e.StartDate).HasColumnName("start_date");
+            entity.Property(e => e.SupplierTypeId).HasColumnName("supplier_type_id");
+
+            entity.HasOne(d => d.SupplierType).WithMany(p => p.Suppliers)
+                .HasForeignKey(d => d.SupplierTypeId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("supplier_supplier_type_id_fkey");
+        });
+
+        modelBuilder.Entity<SupplierType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("supplier_type_pkey");
+
+            entity.ToTable("supplier_type");
+
+            entity.HasIndex(e => e.Name, "supplier_type_name_key").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
+        });
+
+        modelBuilder.Entity<UnitOfMeasure>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("unit_of_measure_pkey");
+
+            entity.ToTable("unit_of_measure");
+
+            entity.HasIndex(e => e.Symbol, "unit_of_measure_symbol_key").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Symbol).HasColumnName("symbol");
         });
 
         OnModelCreatingPartial(modelBuilder);

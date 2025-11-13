@@ -1,5 +1,4 @@
-﻿<!-- Srez1/Views/MaterialEditWindow.axaml -->
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="Srez1.Views.MaterialEditWindow"
         Title="Материал — редактирование"
@@ -14,7 +13,7 @@
         <TextBox Name="StockBox" Grid.Row="3" Margin="10" Watermark="Количество на складе"/>
         <TextBox Name="MinStockBox" Grid.Row="4" Margin="10" Watermark="Минимальное количество"/>
         <TextBox Name="PackageBox" Grid.Row="5" Margin="10" Watermark="Количество в упаковке"/>
-        <TextBox Name="UnitBox" Grid.Row="6" Margin="10" Watermark="Единица измерения"/>
+        <ComboBox Name="UnitCombo" Grid.Row="6" Margin="10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right" Margin="10">
             <Button Content="Сохранить" Click="OnSave"/>
             <Button Content="Отмена" Click="OnCancel"/>
