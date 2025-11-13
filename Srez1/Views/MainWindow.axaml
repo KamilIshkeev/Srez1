@@ -20,7 +20,7 @@
 
     <Grid RowDefinitions="Auto,*,Auto">
 
-        <StackPanel Orientation="Horizontal" Margin="10">
+        <StackPanel Orientation="Horizontal" Background="#ABCFCE" Margin="10">
             <Image Source="avares://Srez1/Resources/Mosaic.png" Width="70" Height="70"/>
             <TextBlock Text="Подсистема материалов" FontSize="24" Margin="10,0,0,0" VerticalAlignment="Center"/>
         </StackPanel>
