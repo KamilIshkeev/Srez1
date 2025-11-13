@@ -1,0 +1,17 @@
+﻿<!-- Srez1/Views/SuppliersWindow.axaml -->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Srez1.Views.SuppliersWindow"
+        Title="Поставщики материала"
+        Width="600" Height="400"
+        Background="#FFFFFF"
+        FontFamily="Comic Sans MS">
+
+    <DataGrid Name="Grid" Margin="10" AutoGenerateColumns="False" CanUserSortColumns="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Поставщик" Binding="{Binding Name}" Width="*"/>
+            <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}" Width="80"/>
+            <DataGridTextColumn Header="Начало сотрудничества" Binding="{Binding StartDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="130"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>
